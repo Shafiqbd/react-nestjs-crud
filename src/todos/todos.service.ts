@@ -16,12 +16,12 @@ export class TodosService {
   findAll(): Promise<TodoEntity[]> {
     return this.todoRepository.find();
   }
-  //   findOne(id: number): Promise<TodoEntity> {
-  //     return this.todoRepository.findOne({ where: { id } });
-  //   }
+  findOne(id: number): Promise<TodoEntity> {
+    return this.todoRepository.findOne({ where: { id } });
+  }
   async update(id: number, todo: TodoEntity): Promise<TodoEntity | null> {
     await this.todoRepository.update(id, todo);
-    return this.todoRepository.findOne(id);
+    return this.findOne(id);
   }
   async remove(id: number): Promise<void> {
     await this.todoRepository.delete(id);
