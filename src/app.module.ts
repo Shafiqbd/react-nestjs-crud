@@ -6,6 +6,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodosModule } from './todos/todos.module';
 import { TodoEntity } from './todos/todo.entity';
+import { UsersModule } from './users/users.module';
+import { UsersEntity } from './users/users.entity';
 
 @Module({
   imports: [
@@ -19,12 +21,13 @@ import { TodoEntity } from './todos/todo.entity';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [TodoEntity],
+        entities: [TodoEntity, UsersEntity],
         synchronize: true,
       }),
       inject: [ConfigService],
     }),
     TodosModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
