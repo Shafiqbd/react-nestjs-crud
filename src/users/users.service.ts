@@ -15,11 +15,17 @@ export class UsersService {
     console.log('result', result[0]);
     return result[0];
   }
-  async findOne(id: any): Promise<any> {
-    const result = await this.userRepository.query(`CALL GetUserById(:id)`, {
+  async findOne(id: number): Promise<UsersEntity> {
+    const [result] = await this.userRepository.query(`CALL GetUserById(?)`, [
       id,
-    });
+    ]);
+    // const result = await this.userRepository.query<UsersEntity>(
+    //   `CALL GetUserById(:id)`,
+    //   {
+    //     id,
+    //   },
+    // );
     console.log('result', result[0]);
-    return result;
+    return result[0];
   }
 }
